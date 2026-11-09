@@ -283,7 +283,7 @@ namespace LogicCuteGuy.Vcs.Editor.Workspace
             var csTask = ApiClient.ListChangesetsAsync(Config.serverUrl, Config.token, Config.repo, Config.branch, 50);
             var branchesTask = ApiClient.ListBranchesAsync(Config.serverUrl, Config.token, Config.repo);
 
-            await Task.WhenAll(locksTask, csTask, branchesTask);
+            await Task.WhenAll(locksTask, csTask, branchesTask).ConfigureAwait(false);
 
             ActiveLocks = locksTask.Result;
             LocksByPath.Clear();
@@ -299,7 +299,7 @@ namespace LogicCuteGuy.Vcs.Editor.Workspace
 
         public static async Task LoginAndConnectAsync(string serverUrl, string repo, string branch, string username, string password)
         {
-            var login = await ApiClient.LoginAsync(serverUrl, username, password);
+            var login = await ApiClient.LoginAsync(serverUrl, username, password).ConfigureAwait(false);
             Config.serverUrl = serverUrl.Trim().TrimEnd('/');
             Config.repo = repo.Trim();
             Config.branch = string.IsNullOrWhiteSpace(branch) ? "main" : branch.Trim();
@@ -307,8 +307,8 @@ namespace LogicCuteGuy.Vcs.Editor.Workspace
             Config.token = login.token;
             SaveConfig();
 
-            await RefreshRemoteStateAsync();
-            await RefreshLocalPendingAsync();
+            await RefreshRemoteStateAsync().ConfigureAwait(false);
+            await RefreshLocalPendingAsync().ConfigureAwait(false);
         }
 
         public static async Task<(long changesetId, bool rebased)> CheckinSelectedAsync(string comment)
@@ -341,7 +341,7 @@ namespace LogicCuteGuy.Vcs.Editor.Workspace
 
             if (uploadHashes.Count > 0)
             {
-                var missing = await ApiClient.GetMissingBlobsAsync(Config.serverUrl, Config.token, Config.repo, uploadHashes);
+                var missing = await ApiClient.GetMissingBlobsAsync(Config.serverUrl, Config.token, Config.repo, uploadHashes).ConfigureAwait(false);
                 var missingSet = new HashSet<string>(missing, StringComparer.OrdinalIgnoreCase);
 
                 string root = ProjectRoot;
@@ -349,8 +349,8 @@ namespace LogicCuteGuy.Vcs.Editor.Workspace
                 {
                     if (item.Kind != "deleted" && missingSet.Contains(item.Sha256))
                     {
-                        byte[] bytes = await File.ReadAllBytesAsync(Path.Combine(root, item.Path));
-                        await ApiClient.UploadBlobAsync(Config.serverUrl, Config.token, Config.repo, item.Sha256, bytes);
+                        byte[] bytes = await File.ReadAllBytesAsync(Path.Combine(root, item.Path)).ConfigureAwait(false);
+                        await ApiClient.UploadBlobAsync(Config.serverUrl, Config.token, Config.repo, item.Sha256, bytes).ConfigureAwait(false);
                         missingSet.Remove(item.Sha256);
                     }
                 }
@@ -370,16 +370,16 @@ namespace LogicCuteGuy.Vcs.Editor.Workspace
                 }).ToList()
             };
 
-            var resp = await ApiClient.CheckinAsync(Config.serverUrl, Config.token, Config.repo, req);
+            var resp = await ApiClient.CheckinAsync(Config.serverUrl, Config.token, Config.repo, req).ConfigureAwait(false);
 
             // Sync local base state to server tree at the new changeset
-            var tree = await ApiClient.GetLatestTreeAsync(Config.serverUrl, Config.token, Config.repo, Config.branch);
+            var tree = await ApiClient.GetLatestTreeAsync(Config.serverUrl, Config.token, Config.repo, Config.branch).ConfigureAwait(false);
             Config.baseChangesetId = tree.changeset_id;
             Config.files = tree.files;
             SaveConfig();
 
-            await RefreshRemoteStateAsync();
-            await RefreshLocalPendingAsync();
+            await RefreshRemoteStateAsync().ConfigureAwait(false);
+            await RefreshLocalPendingAsync().ConfigureAwait(false);
             return (resp.changeset_id, resp.rebased);
         }
 
