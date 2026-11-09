@@ -1,0 +1,20 @@
+[Unit]
+Description=ChibiVCS Self-Hosted Version Control Server
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=chibivcs
+Group=chibivcs
+WorkingDirectory=/var/lib/chibivcs
+ExecStart=/usr/local/bin/chibivcs-server --data-dir /var/lib/chibivcs serve --bind 100.65.127.80:8087
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/chibivcs
+
+[Install]
+WantedBy=multi-user.target

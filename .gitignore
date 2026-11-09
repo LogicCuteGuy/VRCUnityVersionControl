@@ -1,0 +1,47 @@
+# ---------- Unity ----------
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.apk
+*.aab
+*.unitypackage
+sysinfo.txt
+crashlytics-build.properties
+
+# VRChat SDK is restored by VCC from Packages/vpm-manifest.json (not redistributable)
+/Packages/com.vrchat.*/
+
+# Unity MCP dev tooling generated assets
+/Assets/SerializedUdonPrograms/
+
+# ChibiVCS workspace metadata (when this project is used as a test workspace)
+/.chibivcs/
+
+# ---------- Rust ----------
+/Server/target/
+
+# ---------- IDE / OS ----------
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

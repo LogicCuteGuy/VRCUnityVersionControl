@@ -1,0 +1,19 @@
+[package]
+name = "chibivcs-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "chibi"
+path = "src/main.rs"
+
+[dependencies]
+chibivcs-proto = { path = "../chibivcs-proto" }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+hex.workspace = true
+anyhow.workspace = true
+clap.workspace = true
+reqwest.workspace = true
