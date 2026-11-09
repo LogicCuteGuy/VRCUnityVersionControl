@@ -1,7 +1,7 @@
 {
   "name": "com.logiccuteguy.vcs",
-  "version": "1.0.0",
-  "displayName": "Chibi VCS (VRChat Team Version Control)",
+  "version": "1.0.1",
+  "displayName": "LogicCuteGuy VCS",
   "description": "Self-hosted Plastic-SCM-style Version Control for VRChat Unity teams. Features content-addressed blob sync, changesets, branches, auto-checkout scene/prefab locking, and Project window status overlays — no Git required on artist PCs.",
   "unity": "2022.3",
   "author": {

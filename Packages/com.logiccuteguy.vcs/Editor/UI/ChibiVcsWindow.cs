@@ -41,17 +41,17 @@ namespace LogicCuteGuy.Vcs.Editor.UI
         private string _statusBanner = "";
         private bool _statusSuccess = true;
 
-        [MenuItem("Window/Chibi VCS", false, 20)]
-        [MenuItem("Tools/Chibi VCS", false, 1)]
+        [MenuItem("Window/LogicCuteGuy VCS", false, 20)]
+        [MenuItem("Tools/LogicCuteGuy VCS", false, 1)]
         public static ChibiVcsWindow OpenWindow()
         {
-            var w = GetWindow<ChibiVcsWindow>("Chibi VCS");
+            var w = GetWindow<ChibiVcsWindow>("LogicCuteGuy VCS");
             w.minSize = new Vector2(560, 440);
             w.Show();
             return w;
         }
 
-        [MenuItem("Assets/Chibi VCS/Lock Selected Asset", false, 30)]
+        [MenuItem("Assets/LogicCuteGuy VCS/Lock Selected Asset", false, 30)]
         private static async void ContextLockSelected()
         {
             if (!ChibiWorkspace.IsInitialized || Selection.activeObject == null) return;
@@ -68,15 +68,15 @@ namespace LogicCuteGuy.Vcs.Editor.UI
                 );
                 await ChibiWorkspace.RefreshRemoteStateAsync();
                 EditorApplication.RepaintProjectWindow();
-                Debug.Log($"[Chibi VCS] Locked '{path}'");
+                Debug.Log($"[LogicCuteGuy VCS] Locked '{path}'");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[Chibi VCS] Lock failed: {ex.Message}");
+                Debug.LogError($"[LogicCuteGuy VCS] Lock failed: {ex.Message}");
             }
         }
 
-        [MenuItem("Assets/Chibi VCS/Unlock Selected Asset", false, 31)]
+        [MenuItem("Assets/LogicCuteGuy VCS/Unlock Selected Asset", false, 31)]
         private static async void ContextUnlockSelected()
         {
             if (!ChibiWorkspace.IsInitialized || Selection.activeObject == null) return;
@@ -94,11 +94,11 @@ namespace LogicCuteGuy.Vcs.Editor.UI
                 );
                 await ChibiWorkspace.RefreshRemoteStateAsync();
                 EditorApplication.RepaintProjectWindow();
-                Debug.Log($"[Chibi VCS] Unlocked '{path}'");
+                Debug.Log($"[LogicCuteGuy VCS] Unlocked '{path}'");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[Chibi VCS] Unlock failed: {ex.Message}");
+                Debug.LogError($"[LogicCuteGuy VCS] Unlock failed: {ex.Message}");
             }
         }
 
@@ -419,7 +419,7 @@ namespace LogicCuteGuy.Vcs.Editor.UI
         private void DrawLoginTab()
         {
             EditorGUILayout.Space(8);
-            GUILayout.Label("ChibiVCS Server & Workspace Connection", EditorStyles.boldLabel);
+            GUILayout.Label("LogicCuteGuy VCS Server & Workspace Connection", EditorStyles.boldLabel);
             _loginServerUrl = EditorGUILayout.TextField("Server URL:", _loginServerUrl);
             _loginRepo = EditorGUILayout.TextField("Repository:", _loginRepo);
             _loginBranch = EditorGUILayout.TextField("Branch:", _loginBranch);

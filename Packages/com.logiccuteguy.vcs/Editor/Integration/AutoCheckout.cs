@@ -72,11 +72,11 @@ namespace LogicCuteGuy.Vcs.Editor.Integration
 
                 if (!CanSaveAsset(norm, out string holder))
                 {
-                    Debug.LogError($"[Chibi VCS] Save blocked! '{norm}' is exclusively locked by teammate '{holder}'.");
+                    Debug.LogError($"[LogicCuteGuy VCS] Save blocked! '{norm}' is exclusively locked by teammate '{holder}'.");
                     if (!Application.isBatchMode)
                     {
                         EditorUtility.DisplayDialog(
-                            "Chibi VCS — Asset Locked by Teammate",
+                            "LogicCuteGuy VCS — Asset Locked by Teammate",
                             $"Cannot save '{norm}' because it is currently locked by '{holder}'.\n\nCoordinate with {holder} or ask an admin to release the lock.",
                             "OK"
                         );
